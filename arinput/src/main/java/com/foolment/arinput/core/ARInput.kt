@@ -31,8 +31,8 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import javax.microedition.khronos.opengles.GL10
 
-open class ARInput(val vertexShader: String = VERTEX_SHADER,
-                   val fragmentShader: String = FRAGMENT_SHADER) {
+open class ARInput(private val vertexShader: String = VERTEX_SHADER,
+                   private val fragmentShader: String = FRAGMENT_SHADER) {
     companion object {
 
         const val VERTEX_SHADER = """
@@ -125,7 +125,7 @@ open class ARInput(val vertexShader: String = VERTEX_SHADER,
         initialized = false
     }
 
-    fun onSizeChanged(width: Int, height: Int) {
+    open fun onSizeChanged(width: Int, height: Int) {
         this.width = width
         this.height = height
     }
@@ -161,12 +161,13 @@ open class ARInput(val vertexShader: String = VERTEX_SHADER,
         render?.requestRender()
     }
 
-    fun isInitialized() = initialized
     fun onTouchEvent(event: MotionEvent) = false
     protected fun getProgram() = program
     protected fun getTextureId() = textureId
     protected fun getTextureIndex() = textureIndex
-    protected fun getTextureTarget() = textureTarget
+    protected fun setTextureTarget(target: Int) {
+        textureTarget = target
+    }
 
     open protected fun onInit() {}
     open protected fun onDestroy() {}

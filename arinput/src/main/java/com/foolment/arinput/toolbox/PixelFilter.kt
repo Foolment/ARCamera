@@ -4,7 +4,7 @@ import android.opengl.GLES20
 import com.foolment.arinput.core.ARInput
 import javax.microedition.khronos.opengles.GL10
 
-class PixelFilter(private val pixel: Float) : ARInput(VERTEX_SHADER, PIXEL_FRAGMENT_SHADER) {
+class PixelFilter(private val pixel: Float) : ARInput(fragmentShader = PIXEL_FRAGMENT_SHADER) {
 
     companion object {
         private const val PIXEL_FRAGMENT_SHADER = """
